@@ -9,6 +9,9 @@
     - login/signup page
         - Sign In/ Sign up Form
         - redirect to browsepage
+
+    - Login form
+    
     - Browse page(after authentication)
         - Header
         - Main movie
