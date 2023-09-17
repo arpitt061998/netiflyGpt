@@ -19,7 +19,7 @@ const Login = () => {
 
   const handleBtnClick = () => {
     // console.log({email,password})
-    const message = checkValidata(email.current.value, password.current.value, name.current.value);
+    const message = checkValidata(email.current.value, password.current.value, name?.current?.value);
     setErrorMessage(message);
     if(message) return;
     //Sign in Sign up logic
