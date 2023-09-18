@@ -11,7 +11,9 @@
     Create signUp user account
     implement signin user api
     created redux store with userSlice
-    
+    fixed signup sign in issue
+    fixed naviagte redirection issue
+    unsubscribe to onAuthStateChanged callback
 # Features
     
     - login/signup page

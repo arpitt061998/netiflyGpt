@@ -1,16 +1,43 @@
 import React, {useState, useEffect, useRef} from 'react';
-import { signOut } from 'firebase/auth';
+import { signOut, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../utils/firebase';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
+import { addUser, removeUser } from '../utils/userSlice';
+import { LOGO_URL } from '../utils/constants';
 
 
 const Header = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const user = useSelector( store => store.user)
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if(user){
+        const {uid, email, displayName, photoURL} = user;
+        dispatch(addUser({
+          uid:uid,
+          email:email,
+          displayName: displayName,
+          photoURL: photoURL
+        }));
+        navigate("/browse")
+      } else {
+        // user is signed out
+        dispatch(removeUser());
+        navigate("/");
+      }
+    })
+
+    // unsubscribe when component unmounts
+    return () => {
+      unsubscribe();
+    };
+  },[]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -29,25 +56,18 @@ const Header = () => {
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
-
-  const handleDropdownItemClick = () => {
-    setIsDropdownOpen(false); 
-  };
   
   const handleSignOut = () => {
     signOut(auth)
-      .then(() => {
-      navigate("/")
-      })
+      .then(() => {})
       .catch(() => {
         navigate("/error");
       })
   }
   
-
   return (
     <div className='absolute w-full md:px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between'>
-      <img  className='w-44 sm:max-sm:w-20' src='https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png' alt='netflixlogo'></img>
+      <img  className='w-44 sm:max-sm:w-20' src = {LOGO_URL} alt='netflixlogo'></img>
       {user && (
             <div className="relative" ref={dropdownRef}>
             <button

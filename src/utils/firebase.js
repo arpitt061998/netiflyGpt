@@ -9,13 +9,13 @@ import { getAuth } from "firebase/auth";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAHL_CxuzxWG2ZhRXb_fdwBihQz07ImeOQ",
-  authDomain: "netiflygpt.firebaseapp.com",
-  projectId: "netiflygpt",
-  storageBucket: "netiflygpt.appspot.com",
-  messagingSenderId: "340001275243",
-  appId: "1:340001275243:web:8f86a01dbafe8298d9202e",
-  measurementId: "G-LBH10PS0WX"
+  apiKey: "AIzaSyDPT8vs03ig2cMeRqFc_GOLAHDiAkwOvr4",
+  authDomain: "movie-netifly.firebaseapp.com",
+  projectId: "movie-netifly",
+  storageBucket: "movie-netifly.appspot.com",
+  messagingSenderId: "955429182068",
+  appId: "1:955429182068:web:866fdd95da1e3cf6ca8f21",
+  measurementId: "G-G943JLJ3EK"
 };
 
 // Initialize Firebase

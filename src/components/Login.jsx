@@ -3,14 +3,13 @@ import { useState,useRef } from 'react';
 import { checkValidata } from '../utils/validate';
 import { auth } from '../utils/firebase';
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
+import { USER_AVATAR } from '../utils/constants';
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const email = useRef(null);
@@ -33,7 +32,7 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL: "https://media.licdn.com/dms/image/C4D03AQGod45ATWcztQ/profile-displayphoto-shrink_400_400/0/1659365951587?e=1700092800&v=beta&t=uRCMGC4LG4_JGCshsTJTi0RWfvr1xiPkrBLhL2dVwuw"
+            photoURL: USER_AVATAR
           }).then(() => {
             const {uid, email, displayName, photoURL} = auth.currentUser;
             dispatch(addUser({
@@ -42,7 +41,6 @@ const Login = () => {
               displayName: displayName,
               photoURL: photoURL
             }));       
-            navigate("/browse");          
           }).catch((error) => {
             console.error("error 0")
             setErrorMessage(error.message)
@@ -59,7 +57,6 @@ const Login = () => {
         .then((userCredential) => {
           const user = userCredential.user;
           console.log(user)
-          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
