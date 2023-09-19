@@ -6,7 +6,6 @@ import { useSelector,useDispatch } from 'react-redux';
 import { addUser, removeUser } from '../utils/userSlice';
 import { LOGO_URL } from '../utils/constants';
 
-
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -88,7 +87,7 @@ const Header = () => {
             <ul className={`z-10 text-sm lg:shadow-soft-3xl duration-250 before:duration-350 before:font-awesome before:ease-soft min-w-44 before:text-5.5 transform-dropdown  absolute left-auto top-1/2 m-0 -mr-4 mt-4 list-none rounded-lg border-0 border-solid border-transparent bg-black bg-opacity-80 bg-clip-padding px-0 py-2 text-left text-slate-500 opacity-0 transition-all before:absolute before:right-7 before:left-auto before:top-0 before:z-40 before:text-white before:transition-all before:content-['\f0d8'] ${isDropdownOpen ? 'opacity-100' : 'opacity-0'}`}>
               <li>
                 <a
-                  className="py-2 lg:ease-soft clear-both block w-full whitespace-nowrap border-0 bg-transparent px-4 text-left font-normal text-white hover:bg-gray-200 lg:transition-colors lg:duration-300"
+                  className="py-2 lg:ease-soft clear-both block w-full whitespace-nowrap border-0 bg-transparent px-4 text-left font-normal text-white lg:transition-colors lg:duration-300"
                 >
                   Action
                 </a>
