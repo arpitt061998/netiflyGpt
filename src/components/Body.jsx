@@ -1,6 +1,8 @@
 import Login from './Login';
-import Browse from './Browse';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { lazy,Suspense } from 'react';
+
+const Browse = lazy(() => import("./Browse"));
 
 const Body = () => {
   const appRouter = createBrowserRouter([
@@ -10,7 +12,15 @@ const Body = () => {
     },
     {
       path: "/browse",
-      element: <Browse/>
+      element: <Suspense
+        fallback={
+        <div className="container">
+          <h1>Loading...</h1>
+        </div>
+        }
+      >
+        <Browse />
+      </Suspense>
     }
   ]);
 
