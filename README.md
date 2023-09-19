@@ -14,6 +14,9 @@
     fixed signup sign in issue
     fixed naviagte redirection issue
     unsubscribe to onAuthStateChanged callback
+    Registered on tmdb webiste, create an app and get access token
+    Get data from TMDB now playing movie list API 
+
 # Features
     
     - login/signup page
@@ -40,3 +43,8 @@
     2. Firebase login
     3. Initialize firebase (firebase --init)
     4. Deploy command -firebase deploy
+
+# FYI (INFO)
+    1. API was calling twice because of <React.strictMode>
+    It happens only in developer mode, when we deploy in production
+    it doesn't calls twice. It does two Api calls just to check inconsistencies in the application.
