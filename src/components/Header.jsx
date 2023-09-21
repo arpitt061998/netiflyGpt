@@ -58,7 +58,9 @@ const Header = () => {
   
   const handleSignOut = () => {
     signOut(auth)
-      .then(() => {})
+      .then(() => {
+        console.log("SIGNED OUT");
+      })
       .catch(() => {
         navigate("/error");
       })
@@ -66,7 +68,7 @@ const Header = () => {
   
   return (
     <div className='absolute w-full md:px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between'>
-      <img  className='w-44 sm:max-sm:w-20' src = {LOGO_URL} alt='netflixlogo'></img>
+      <img  className='md:w-44 w-28 object-contain' src = {LOGO_URL} alt='netflixlogo'></img>
       {user && (
             <div className="relative" ref={dropdownRef}>
             <button
@@ -84,7 +86,7 @@ const Header = () => {
             </button>
 
             <p className={`transform-dropdown-show ${isDropdownOpen ? 'block' : 'hidden'}`}></p>
-            <ul className={`z-10 text-sm lg:shadow-soft-3xl duration-250 before:duration-350 before:font-awesome before:ease-soft min-w-44 before:text-5.5 transform-dropdown  absolute left-auto top-1/2 m-0 -mr-4 mt-4 list-none rounded-lg border-0 border-solid border-transparent bg-black bg-opacity-80 bg-clip-padding px-0 py-2 text-left text-slate-500 opacity-0 transition-all before:absolute before:right-7 before:left-auto before:top-0 before:z-40 before:text-white before:transition-all before:content-['\f0d8'] ${isDropdownOpen ? 'opacity-100' : 'opacity-0'}`}>
+            <ul className={`z-10 text-sm lg:shadow-soft-3xl duration-250 before:duration-350 before:font-awesome before:ease-soft min-w-44 before:text-5.5 transform-dropdown  absolute left-auto top-1/2 m-0 -mr-4 mt-4 list-none rounded-lg border-0 border-solid border-transparent bg-black bg-opacity-80 bg-clip-padding px-0 py-2 text-left text-slate-500 opacity-0 transition-all before:absolute before:right-7 before:left-auto before:top-0 before:z-40 before:text-white before:transition-all before:content-['\f0d8'] ${isDropdownOpen ? 'block opacity-100' : 'hidden opacity-0'}`}>
               <li>
                 <a
                   className="py-2 lg:ease-soft clear-both block w-full whitespace-nowrap border-0 bg-transparent px-4 text-left font-normal text-white lg:transition-colors lg:duration-300"
