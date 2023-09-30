@@ -5,7 +5,7 @@ import { auth } from '../utils/firebase';
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
-import { USER_AVATAR } from '../utils/constants';
+import { USER_AVATAR, BG_URL } from '../utils/constants';
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -74,7 +74,7 @@ const Login = () => {
     <>
       <Header/>
       <div className ='absolute w-full h-full'>
-      <img className = 'w-full h-full object-cover' src='https://assets.nflxext.com/ffe/siteui/vlv3/42df4e1f-bef6-499e-87ff-c990584de314/5e7c383c-1f88-4983-b4da-06e14c0984ba/IN-en-20230904-popsignuptwoweeks-perspective_alpha_website_large.jpg' alt='logo'></img>
+      <img className = 'w-full h-full object-cover' src={BG_URL} alt='logo'></img>
       </div>
       <div className='form-wrapper absolute w-full h-full flex justify-center items-center'>
         <form onSubmit = {(e)=> e.preventDefault()} className='bg-black w-10/12 md:w-4/12 p-12 text-white rounded-lg bg-opacity-80'>

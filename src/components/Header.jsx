@@ -4,12 +4,19 @@ import { auth } from '../utils/firebase';
 import { useNavigate } from 'react-router-dom';
 import { useSelector,useDispatch } from 'react-redux';
 import { addUser, removeUser } from '../utils/userSlice';
-import { LOGO_URL } from '../utils/constants';
+import { LOGO_URL, SUPPORTED_LANGUAGE } from '../utils/constants';
+import { toggleGptSearchView } from '../utils/gptSlice';
+import lang from '../utils/languageConstants';
+import { changeLanguage } from '../utils/configSlice';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass, faHouse } from '@fortawesome/free-solid-svg-icons';
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const selectedLang = useRef(null);
   const user = useSelector( store => store.user)
+  const showGptSearch = useSelector( store => store.gpt.showGptSearch)
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -55,6 +62,14 @@ const Header = () => {
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
+
+  const handleLanguageChange = () => {
+    dispatch(changeLanguage(selectedLang.current.value))
+  }
+
+  const handleGptSearchClick = () => {
+    dispatch(toggleGptSearchView());
+  };
   
   const handleSignOut = () => {
     signOut(auth)
@@ -70,6 +85,33 @@ const Header = () => {
     <div className='absolute w-full md:px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between'>
       <img  className='md:w-44 w-28 object-contain' src = {LOGO_URL} alt='netflixlogo'></img>
       {user && (
+          <div className='flex'>
+            { showGptSearch &&
+              ( 
+                <select ref= {selectedLang} 
+                  className='px-2 rounded-lg py-1 m-auto h-[3rem] bg-gray-900 text-white' onChange={handleLanguageChange}>
+                  {SUPPORTED_LANGUAGE.map(lang => 
+                    <option key={lang.identifier} value={lang.identifier}>{lang.name}</option>)
+                  }
+                </select>
+              )
+          }
+            <div className='m-auto'>
+            <button 
+              className="py-2 px-4 md:mx-4 mx-1 bg-purple-800 text-white rounded-lg"
+              onClick={handleGptSearchClick}
+            >
+              {showGptSearch ? (
+                <>
+                  Home <FontAwesomeIcon className="px-1" icon={faHouse} />
+                </>
+              ) : (
+                <>
+                  Gpt Search <FontAwesomeIcon className="px-1" icon={faMagnifyingGlass} />
+                </>
+              )}
+            </button>
+            </div>
             <div className="relative" ref={dropdownRef}>
             <button
               aria-expanded={isDropdownOpen}
@@ -86,19 +128,12 @@ const Header = () => {
             </button>
 
             <p className={`transform-dropdown-show ${isDropdownOpen ? 'block' : 'hidden'}`}></p>
-            <ul className={`z-10 text-sm lg:shadow-soft-3xl duration-250 before:duration-350 before:font-awesome before:ease-soft min-w-44 before:text-5.5 transform-dropdown  absolute left-auto top-1/2 m-0 -mr-4 mt-4 list-none rounded-lg border-0 border-solid border-transparent bg-black bg-opacity-80 bg-clip-padding px-0 py-2 text-left text-slate-500 opacity-0 transition-all before:absolute before:right-7 before:left-auto before:top-0 before:z-40 before:text-white before:transition-all before:content-['\f0d8'] ${isDropdownOpen ? 'block opacity-100' : 'hidden opacity-0'}`}>
+            <ul className={`z-10 text-sm lg:shadow-soft-3xl duration-250 before:duration-350 before:font-awesome before:ease-soft min-w-44 before:text-5.5 transform-dropdown  absolute left-auto top-1/2 m-0 -mr-4 mt-6 list-none rounded-lg border-0 border-solid border-transparent bg-black bg-opacity-80 bg-clip-padding px-0 py-2 text-left text-slate-500 opacity-0 transition-all before:absolute before:right-7 before:left-auto before:top-0 before:z-40 before:text-white before:transition-all before:content-['\f0d8'] ${isDropdownOpen ? 'block opacity-100' : 'hidden opacity-0'}`}>
               <li>
                 <a
                   className="py-2 lg:ease-soft clear-both block w-full whitespace-nowrap border-0 bg-transparent px-4 text-left font-normal text-white lg:transition-colors lg:duration-300"
                 >
                   Action
-                </a>
-              </li>
-              <li>
-                <a
-                  className="py-2 lg:ease-soft clear-both block w-full whitespace-nowrap border-0 bg-transparent px-4 text-left font-normal text-white lg:transition-colors lg:duration-300"
-                >
-                  Another action
                 </a>
               </li>
               <li>
@@ -110,6 +145,7 @@ const Header = () => {
                 </button>
               </li>
             </ul>
+          </div>
           </div>
       )}
     </div>
