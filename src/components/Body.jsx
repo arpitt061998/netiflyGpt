@@ -1,6 +1,7 @@
 import Login from './Login';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { lazy,Suspense } from 'react';
+import Watch from './Watch';
 
 const Browse = lazy(() => import("./Browse"));
 
@@ -21,6 +22,10 @@ const Body = () => {
       >
         <Browse />
       </Suspense>
+    },
+    {
+      path:"/watch/:id",
+      element: <Watch/>
     }
   ]);
 
