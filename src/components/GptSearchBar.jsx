@@ -21,7 +21,6 @@ const GptSearchBar = () => {
     var searchValue = searchText.current.value;
     //Make an api call to gpt api and get movies result
     const gptQuery = "Act like a movie recommendation system and suggest some movies for the query" + searchValue + ". only give me names of 5 movies, comma separated like the example result given ahead. Example result: Bhagam bhag, Koi Mil gaya, Sholay, Don, Golmaal";
-    console.log(gptQuery);
     var data = [];
     try {
       const gptResult = await openai.chat.completions.create({
@@ -31,7 +30,6 @@ const GptSearchBar = () => {
       const gptMovies = gptResult.choices?.[0]?.message?.content.split(",");
       const promiseArray =  gptMovies.map((movie) => searchMovieTMDB(movie));
       const tmdbResult = await Promise.all(promiseArray);
-      console.log(tmdbResult);
       dispatch(addGptMovieResult({movieNames:gptMovies, movieResults: tmdbResult}))
     }
     catch(error){

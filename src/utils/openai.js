@@ -6,6 +6,5 @@ const openai = new OpenAI({
   dangerouslyAllowBrowser: true // defaults to process.env["OPENAI_API_KEY"]
 });
 
-console.log(openai);
 
 export default openai;

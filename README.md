@@ -1,3 +1,8 @@
+
+# DEMO LINK:
+
+[### **NETIFLYGPT DEMO**](https://movie-netifly.web.app/)
+
 # NETFLIX GPT (By Arpit)
 
     installed create vite app
@@ -16,6 +21,12 @@
     unsubscribe to onAuthStateChanged callback
     Registered on tmdb webiste, create an app and get access token
     Get data from TMDB now playing movie list API 
+    created redux store with movieslice
+    Listed all the movie cards based on upcoming movie, top rated movies and popular movies
+    Dynamic intiliazation and embedding of youtube videos in page.
+    Integrated application with openai api to list movies based on user choice
+    ddded .env file for storing api keys
+    made site responsive
 
 # Features
     

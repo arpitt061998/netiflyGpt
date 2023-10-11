@@ -5,7 +5,6 @@ const UnMuteWidget = ({player}) => {
   const muteBtn = useRef(null);
   const unMuteBtn = useRef(null);
   const handleBtnClick = () => {
-    console.log(player);
     if(muted){
       player.unMute();
       setMuted(false);

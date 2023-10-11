@@ -32,7 +32,6 @@ const Header = () => {
           displayName: displayName,
           photoURL: photoURL
         }));
-        console.log("navigated");
         if(!url.includes("watch"))
           navigate("/browse")
       } else {

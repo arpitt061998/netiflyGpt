@@ -4,7 +4,6 @@ import useMovieTrailer from "../hooks/useMovieTrailer";
 const PlayPage = ({id}) => {
   const trailerVideo = useSelector(store => store.movies?.trailerVideo);
   useMovieTrailer(id, true);
-  console.log(trailerVideo)
   return (
     <div className="w-full no-scrollbar">
         <iframe 

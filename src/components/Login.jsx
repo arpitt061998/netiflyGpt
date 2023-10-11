@@ -17,7 +17,6 @@ const Login = () => {
   const name = useRef(null);
 
   const handleBtnClick = () => {
-    // console.log({email,password})
     const message = checkValidata(email.current.value, password.current.value, name?.current?.value);
     setErrorMessage(message);
     if(message) return;
@@ -42,12 +41,10 @@ const Login = () => {
               photoURL: photoURL
             }));       
           }).catch((error) => {
-            console.error("error 0")
             setErrorMessage(error.message)
           })
         })
         .catch((error) => {
-          console.error("error 1")
           const errorCode = error.code;
           const errorMessage = error.message;
           setErrorMessage(errorCode + "-" +errorMessage);
@@ -56,7 +53,6 @@ const Login = () => {
       signInWithEmailAndPassword(auth, email?.current?.value, password?.current?.value)
         .then((userCredential) => {
           const user = userCredential.user;
-          console.log(user)
         })
         .catch((error) => {
           const errorCode = error.code;
