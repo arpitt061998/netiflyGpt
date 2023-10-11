@@ -1,7 +1,7 @@
 
 # DEMO LINK:
 
-[### **NETIFLYGPT DEMO**](https://movie-netifly.web.app/)
+[<span style="font-size: 24px; font-weight: bold;">NETIFLYGPT DEMO**</span>](https://movie-netifly.web.app/)
 
 # NETFLIX GPT (By Arpit)
 
